@@ -2,7 +2,16 @@ from urllib import request
 from flask import *
 import json , time 
 
+import os
+from flask import send_from_directory
+
+
 app = Flask(__name__)
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'),
+                          'favicon.ico',mimetype='image/vnd.microsoft.icon')
 
 # our first endpoint
 @app.route('/' , methods= ['GET']) 
@@ -24,5 +33,4 @@ def Requestpage() :
     return jsonFormat
 
 if __name__ =='__main__':
-    app.run(port =5757)
-
+    app.run( debug = True,port =5757)
